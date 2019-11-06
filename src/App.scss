@@ -1,0 +1,95 @@
+:root {
+  --color-gray: #f5f5f5;
+  --color-dark-gray: #939393;
+  --color-light-gray: #cccccc;
+  --color-black: #000000;
+  --color-white: #ffffff;
+
+  --color-blue: #17a6ff;
+  --color-dark-blue: #1084cb;
+}
+
+.Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: var(--color-gray);
+
+  &-title {
+    font-size: 48px;
+    color: var(--color-black);
+  }
+  &-description {
+    color: var(--color-dark-gray);
+    margin-top: 8px;
+  }
+
+
+  &-list {
+    margin-top: 32px;
+    margin-bottom: 32px;
+    &-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      width: 600px;
+      height: 60px;
+
+      background-color: var(--color-white);
+      border-radius: 4px;
+
+      padding: 8px 16px;
+      margin-top: 16px;
+
+      &-title {
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      &-delete {
+        border: none;
+        background-color: none;
+      }
+    }
+  }
+}
+
+
+.Button {
+  border: none;
+  height: 60px;
+  border: 4px;
+
+  color: var(--color-black);
+  font-size: 16px;
+  font-weight: 600;
+
+  padding: 16px;
+}
+
+.Button.PRIMARY {
+  background: var(--color-blue);
+  border: 1px solid var(--color-dark-blue);
+  color: var(--color-white);
+}
+
+.Button.SECONDARY {
+  background: var(--color-white);
+  border: 1px solid black;
+}
+
+.Button.DISABLED {
+  background: var(--color-light-gray);
+  color: var(--color-white);
+}
+
+.Button.FULL {
+  width: 100%;
+}
+
