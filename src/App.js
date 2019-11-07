@@ -1,46 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './App.scss';
 
-
-const LIST = [
-  {
-    id: 1,
-    title: 'Titulo',
-  },
-  {
-    id: 2,
-    title: 'Titulo Dos',
-  },
-  {
-    id: 3,
-    title: 'Titulo Tres',
-  }
-];
-
 function App() {
-  const [list, setList] = useState(LIST);
+  const [list, setList] = useState(null);
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   const deleteItem = (id) => {
     const newList = [...list].filter(x => x.id !== id);
-    console.log(newList);
     setList(newList);
   }
 
   const addItem = (title) => {
-    const newProduct = {
+    const newList = [...list, {
       id: list.length + 1,
       title,
-    }
-    const newList = [...list, newProduct];
-
+    }];
     setList(newList);
     setShowModal(false);
   }
 
-  console.log(list);
+  useEffect(() => {
+    const listStore = localStorage.getItem('list');
+    const list = listStore && JSON.parse(listStore) || [];
+    setList(list);
+  }, [])
+
+  useEffect(() => {
+    localStorage.setItem('list', JSON.stringify(list));
+  }, [list])
+
+
+  if(!list) {
+    return <div className="Loading"> Loading ... </div>
+  }
 
   return (
     <div className="Container">
@@ -53,8 +47,7 @@ function App() {
 
       <List list={list} deleteItem={deleteItem} />
       <Button onClick={() => setShowModal(true)} title="Add item" theme="PRIMARY" />
-
-
+      
       {showModal && <ModalAddItem addItem={addItem} onCloseClick={() => setShowModal(false)} />}
     </div>
   );
@@ -78,8 +71,6 @@ function List ({ list, deleteItem }) {
   </div>
   )
 }
-
-
 
 function Button ({ onClick, title, disabled, theme }) {
   return (
@@ -105,11 +96,19 @@ Button.defaultProps = {
 
 function ModalAddItem ({ addItem, onCloseClick }) {
   const [title, setTitle] = useState('');
+
+  const handleKeyUp = (e) => {
+    if(e.keyCode === 13 && title.length > 0) {
+      addItem(title);
+      onCloseClick();
+    }
+  }
+
   return (
     <div className="Modal">
     <div className="ModalAddItem">
       <span className="ModalAddItem-title">Add item</span>
-      <input className="ModalAddItem-input" type="text" onChange={({ target }) => setTitle(target.value)} />
+      <input className="ModalAddItem-input" type="text" onChange={(e) => setTitle(e.target.value)} onKeyUp={handleKeyUp} />
 
       <div className="ModalAddItem-wrapper">
       <Button theme="SECONDARY" title="Cancel" onClick={onCloseClick} />
