@@ -21,9 +21,11 @@ const LIST = [
 function App() {
   const [list, setList] = useState(LIST);
   const [loading, setLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const deleteItem = (id) => {
     const newList = [...list].filter(x => x.id !== id);
+    console.log(newList);
     setList(newList);
   }
 
@@ -35,11 +37,10 @@ function App() {
     const newList = [...list, newProduct];
 
     setList(newList);
+    setShowModal(false);
   }
 
-  const openModal = () => {
-
-  };
+  console.log(list);
 
   return (
     <div className="Container">
@@ -47,11 +48,14 @@ function App() {
         Supermarket List
       </span>
       <span className="Container-description">
-        3 ITEMS
+        {list.length} ITEMS
       </span>
 
-      <List list={LIST} deleteItem={deleteItem} />
-      <Button handleClick={openModal} title="Add item" theme="PRIMARY" />
+      <List list={list} deleteItem={deleteItem} />
+      <Button onClick={() => setShowModal(true)} title="Add item" theme="PRIMARY" />
+
+
+      {showModal && <ModalAddItem addItem={addItem} onCloseClick={() => setShowModal(false)} />}
     </div>
   );
 }
@@ -61,11 +65,14 @@ function App() {
 function List ({ list, deleteItem }) {
   return (
     <div className="Container-list">
-      {list.map(( { id, title }, i) => (
+      {list.length === 0 && 
+        <div className="Container-list-message"> Oops! You dont have items in the list, But you can add one!</div>
+      }
+      {list.map(( { id, title }) => (
                     <div className="Container-list-item" key={id}>
                     <span className="Container-list-item-title">{title}</span>
                     <button type="button" className="Container-list-item-delete" 
-                    onClick={() => deleteItem(i)}> Borrar </button>
+                    onClick={() => deleteItem(id)}> Borrar </button>
                   </div>
        ))}
   </div>
@@ -74,11 +81,11 @@ function List ({ list, deleteItem }) {
 
 
 
-function Button ({ handleClick, title, disabled, theme }) {
+function Button ({ onClick, title, disabled, theme }) {
   return (
     <button 
     type="button"
-    onClick={handleClick}
+    onClick={onClick}
     disabled={disabled}
     className={`Button ${theme}`}
     >
@@ -96,15 +103,22 @@ Button.defaultProps = {
 }
 
 
-function ModalAddProduct ({ addProduct }) {
+function ModalAddItem ({ addItem, onCloseClick }) {
   const [title, setTitle] = useState('');
   return (
-    <div className="ModalAddProduct">
-      <span className="ModalAddProduct-title">Add Product</span>
-      <input type="text" onChange={({ target }) => setTitle(target.value)} />
+    <div className="Modal">
+    <div className="ModalAddItem">
+      <span className="ModalAddItem-title">Add item</span>
+      <input className="ModalAddItem-input" type="text" onChange={({ target }) => setTitle(target.value)} />
 
-      <Button theme="PRIMARY" />
-      <Button theme={title.length === 0 ? 'DISABLED' : 'PRIMARY'} />
+      <div className="ModalAddItem-wrapper">
+      <Button theme="SECONDARY" title="Cancel" onClick={onCloseClick} />
+      <Button theme={title.length === 0 ? 'DISABLED' : 'PRIMARY'} title="Add"
+       onClick={() => addItem(title)}
+       disabled={title.length === 0}
+        />
+      </div>
+    </div>
     </div>
   ) 
 }

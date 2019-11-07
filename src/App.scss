@@ -33,6 +33,14 @@
   &-list {
     margin-top: 32px;
     margin-bottom: 32px;
+
+    height: 320px;
+    overflow-y: auto;
+
+    &-message {
+      margin-top: 64px;
+    }
+
     &-item {
       display: flex;
       justify-content: space-between;
@@ -81,7 +89,7 @@
 
 .Button.SECONDARY {
   background: var(--color-white);
-  border: 1px solid black;
+  border: 1px solid var(--color-light-gray);
 }
 
 .Button.DISABLED {
@@ -93,3 +101,60 @@
   width: 100%;
 }
 
+
+
+
+.Modal {
+  background: rgba(1,1,1,0.3);
+
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  width: 100vw;
+  height: 100vh;
+
+  z-index: 2;
+}
+
+
+.ModalAddItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  
+  height: 180px;
+  width: 400px;
+
+  background: var(--color-white);
+  box-shadow: 0 4px 4px 0 rgba(1, 1, 1, 0.2);
+  border-radius: 4px;
+
+  padding: 32px 24px;
+  box-sizing: content-box;
+
+  &-title {
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  &-input {
+    height: 32px;
+    border-radius: 4px;
+    border: 1px solid var(--color-light-gray);
+    padding: 4px 12px;
+  }
+
+  &-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
+
+}
