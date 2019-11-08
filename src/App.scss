@@ -4,7 +4,6 @@
   --color-light-gray: #cccccc;
   --color-black: #000000;
   --color-white: #ffffff;
-
   --color-blue: #17a6ff;
   --color-dark-blue: #1084cb;
 }
@@ -62,10 +61,25 @@
 
       &-delete {
         border: none;
-        background-color: none;
+        background-color: transparent;
+        background: url('trash.svg') no-repeat center;
+        width: 24px;
+        height: 24px;
       }
     }
   }
+}
+
+
+.Button.PRIMARY {
+  background: var(--color-blue);
+  border: 1px solid var(--color-dark-blue);
+  color: var(--color-white);
+}
+
+.Button.SECONDARY {
+  background: var(--color-white);
+  border: 1px solid var(--color-light-gray);
 }
 
 
@@ -79,23 +93,14 @@
   font-weight: 600;
 
   padding: 16px;
+
+  &[disabled] {
+    background: var(--color-light-gray);
+    color: var(--color-white);
+    border: none;
+  }
 }
 
-.Button.PRIMARY {
-  background: var(--color-blue);
-  border: 1px solid var(--color-dark-blue);
-  color: var(--color-white);
-}
-
-.Button.SECONDARY {
-  background: var(--color-white);
-  border: 1px solid var(--color-light-gray);
-}
-
-.Button.DISABLED {
-  background: var(--color-light-gray);
-  color: var(--color-white);
-}
 
 .Button.FULL {
   width: 100%;

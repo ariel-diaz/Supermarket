@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import uniqid from 'uniqid';
+import TrashIcon from './trash.svg';
+
 import './App.scss';
 
 function App() {
@@ -14,7 +17,7 @@ function App() {
 
   const addItem = (title) => {
     const newList = [...list, {
-      id: list.length + 1,
+      id: uniqid(),
       title,
     }];
     setList(newList);
@@ -23,7 +26,7 @@ function App() {
 
   useEffect(() => {
     const listStore = localStorage.getItem('list');
-    const list = listStore && JSON.parse(listStore) || [];
+    const list = (listStore && JSON.parse(listStore)) || [];
     setList(list);
   }, [])
 
@@ -65,7 +68,10 @@ function List ({ list, deleteItem }) {
                     <div className="Container-list-item" key={id}>
                     <span className="Container-list-item-title">{title}</span>
                     <button type="button" className="Container-list-item-delete" 
-                    onClick={() => deleteItem(id)}> Borrar </button>
+                    onClick={() => deleteItem(id)}>    
+                     {/* <img src={TrashIcon} />  */}
+                    
+                    </button>
                   </div>
        ))}
   </div>
@@ -96,6 +102,7 @@ Button.defaultProps = {
 
 function ModalAddItem ({ addItem, onCloseClick }) {
   const [title, setTitle] = useState('');
+  const ref = useRef(null);
 
   const handleKeyUp = (e) => {
     if(e.keyCode === 13 && title.length > 0) {
@@ -104,15 +111,28 @@ function ModalAddItem ({ addItem, onCloseClick }) {
     }
   }
 
+  const handleClick = e => {
+    if(ref.current && !ref.current.contains(e.target)) {
+      onCloseClick();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClick);
+    return () => {
+      document.removeEventListener('click', handleClick);
+    }
+  });
+
   return (
     <div className="Modal">
-    <div className="ModalAddItem">
+    <div className="ModalAddItem" ref={ref}>
       <span className="ModalAddItem-title">Add item</span>
       <input className="ModalAddItem-input" type="text" onChange={(e) => setTitle(e.target.value)} onKeyUp={handleKeyUp} />
 
       <div className="ModalAddItem-wrapper">
       <Button theme="SECONDARY" title="Cancel" onClick={onCloseClick} />
-      <Button theme={title.length === 0 ? 'DISABLED' : 'PRIMARY'} title="Add"
+      <Button theme="PRIMARY" title="Add"
        onClick={() => addItem(title)}
        disabled={title.length === 0}
         />
