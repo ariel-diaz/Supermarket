@@ -59,7 +59,7 @@
         font-weight: bold;
       }
 
-      &-delete {
+      &-btn {
         border: none;
         background-color: transparent;
         background: url('trash.svg') no-repeat center;
@@ -69,7 +69,6 @@
     }
   }
 }
-
 
 .Button.PRIMARY {
   background: var(--color-blue);
@@ -82,11 +81,11 @@
   border: 1px solid var(--color-light-gray);
 }
 
-
 .Button {
   border: none;
   height: 60px;
   border: 4px;
+  border-radius: 4px;
 
   color: var(--color-black);
   font-size: 16px;
@@ -101,13 +100,9 @@
   }
 }
 
-
 .Button.FULL {
   width: 100%;
 }
-
-
-
 
 .Modal {
   background: rgba(1,1,1,0.3);
@@ -160,6 +155,5 @@
     display: flex;
     justify-content: space-between;
   }
-
 
 }

@@ -16,16 +16,19 @@ const LIST = [
       title: 'Titulo Tres',
     }
   ];
-  
 
-export const list = {
-    get: async () => {
-        return LIST;
-    },
-    add: async (item) => {
 
-    },
-    delete: async (id) => {
-        
-    }
-}
+ const API = {
+    get: () => new Promise( ( resolve, reject ) => {
+      setTimeout(() => resolve(LIST), 1000);
+    }),
+    add: (item) => new Promise((resolve, reject) => {
+      setTimeout(() => resolve(item), 1000);
+    }),
+    delete: (id) => new Promise((resolve, reject) => {
+      setTimeout(() => resolve(id), 1000);
+    }),
+};
+
+
+export default API;
