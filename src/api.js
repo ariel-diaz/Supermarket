@@ -19,15 +19,15 @@ const LIST = [
 
 
  const API = {
-    get: () => new Promise( ( resolve, reject ) => {
-      setTimeout(() => resolve(LIST), 1000);
-    }),
-    add: (item) => new Promise((resolve, reject) => {
-      setTimeout(() => resolve(item), 1000);
-    }),
-    delete: (id) => new Promise((resolve, reject) => {
-      setTimeout(() => resolve(id), 1000);
-    }),
+    get: async () => {
+      setTimeout(() =>  LIST, 1000);
+    },
+    add: async (item) => {
+      setTimeout(() => item, 1000);
+    },
+    delete: async (id) => {
+      setTimeout(() => id, 1000);
+    },
 };
 
 
