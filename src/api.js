@@ -1,34 +1,33 @@
-
-
-
-
 const LIST = [
-    {
-      id: 1,
-      title: 'Titulo',
-    },
-    {
-      id: 2,
-      title: 'Titulo Dos',
-    },
-    {
-      id: 3,
-      title: 'Titulo Tres',
-    }
-  ];
+  {
+    id: 1,
+    title: 'Titulo'
+  },
+  {
+    id: 2,
+    title: 'Titulo Dos'
+  },
+  {
+    id: 3,
+    title: 'Titulo Tres'
+  }
+];
 
+const wait = ms => new Promise(r => setTimeout(r, ms));
 
- const API = {
-    get: async () => {
-      setTimeout(() =>  LIST, 1000);
-    },
-    add: async (item) => {
-      setTimeout(() => item, 1000);
-    },
-    delete: async (id) => {
-      setTimeout(() => id, 1000);
-    },
+const API = {
+  get: async () => {
+    await wait(500);
+    return LIST;
+  },
+  add: async () => {
+    await wait(500);
+    return new Date().toISOString();
+  },
+  delete: async id => {
+    await wait(500);
+    return id;
+  }
 };
-
 
 export default API;
