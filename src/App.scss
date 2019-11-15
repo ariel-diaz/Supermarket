@@ -20,7 +20,7 @@
   background-color: var(--color-gray);
 
   &-title {
-    font-size: 48px;
+    font-size: 2.5em;
     color: var(--color-black);
   }
   &-description {
@@ -28,16 +28,26 @@
     margin-top: 8px;
   }
 
+  &-scrollbox {
+    display: flex;
+    justify-content: center;  
 
+    width: calc(44% - 40px);  
+    min-width: 280px;
+    height: 320px; 
+    overflow-y: scroll;   
+
+    margin: 32px 0;  
+    padding: 0 1em;
+  }
   &-list {
-    margin-top: 32px;
-    margin-bottom: 32px;
-
-    height: 320px;
-    overflow-y: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
 
     &-message {
-      margin-top: 64px;
+      margin: 32px 0px;
     }
 
     &-item {
@@ -45,19 +55,24 @@
       justify-content: space-between;
       align-items: center;
 
-      width: 600px;
-      height: 60px;
+      width: 100%;
+      min-width: 280px;
 
       background-color: var(--color-white);
       border-radius: 4px;
       box-shadow: 0 1px 1px 0 rgba(1, 1, 1, 0.2);
 
-      padding: 8px 16px;
-      margin-top: 16px;
+      padding: 16px 24px;
+      margin-bottom: 8px;
+      box-sizing: border-box;
 
       &-title {
         font-size: 18px;
         font-weight: bold;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        margin-right: 16px;
       }
 
       &-btn {
@@ -83,22 +98,22 @@
 }
 
 .Button.FULL {
-  width: 400px;
+  width: calc(44% - 40px);
+  min-width: 280px;
 }
 
 .Button {
   border: none;
-  height: 60px;
   border: 4px;
   border-radius: 4px;
 
-  width: 110px;
+  width: 92px;
 
   color: var(--color-black);
   font-size: 16px;
   font-weight: 600;
 
-  padding: 16px;
+  padding: 12px 16px;
 
   &[disabled] {
     background: var(--color-light-gray);
@@ -130,16 +145,16 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+
+  width: 320px;
   
-  height: 180px;
-  width: 400px;
-
+  
   background: var(--color-white);
-  box-shadow: 0 4px 4px 0 rgba(1, 1, 1, 0.2);
+  box-shadow: 0 4px 4px 0
+  rgba(1, 1, 1, 0.2);
   border-radius: 4px;
-
-  padding: 32px 24px;
-  box-sizing: content-box;
+  
+  padding: 32px 48px;
 
   &-title {
     text-align: center;
@@ -148,15 +163,33 @@
   }
 
   &-input {
+    margin-top: 24px;
     height: 32px;
     border-radius: 4px;
     border: 1px solid var(--color-light-gray);
     padding: 4px 12px;
+    font-weight: 600;
   }
 
   &-wrapper {
     display: flex;
     justify-content: space-between;
+    margin-top: 16px;
   }
 
+  @media only screen and (max-width: 600px) {
+    position: absolute;
+    bottom: 0;
+
+    width: 100%;
+    height: 33vh;
+    
+    box-shadow:1px 6px 3px 4px rgba(1, 1, 1, 0.2);
+    padding: 16px 24px;
+    box-sizing: border-box;
+
+    &-title {
+      font-size: 18px;
+    }
+  }
 }
