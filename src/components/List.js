@@ -5,7 +5,7 @@ function List({ list, deleteItem }) {
     <div className="Container-scrollbox">
       <div className="Container-list">
         {list.length === 0 ? (
-          <div className="Container-list-message">
+          <div className="Container-list-message" date-testid="label-message">
             Oops! You dont have items in the list, But you can add one!
           </div>
         ) : (
