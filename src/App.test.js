@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import App from './App';
 import List from './components/List';
 import Modal from './components/Modal';
@@ -14,9 +14,7 @@ describe('<App/>', () => {
 describe('<List />', () => {
   it('show message when list is empty', () => {
     const { getByText } = render(<List list={[]} />);
-    expect(
-      getByText('Oops! You dont have items in the list, But you can add one!')
-    ).toBeInTheDocument();
+    expect(getByText('Oops! You dont have items in the list.')).toBeInTheDocument();
   });
 
   it('render list', () => {

@@ -56,14 +56,26 @@ function App() {
   };
 
   useEffect(() => {
-    const oldList = localStorage.getItem('list');
-    const listStore = (oldList && JSON.parse(oldList)) || [];
-    setList(listStore);
+    const getList = () => {
+      API.get()
+        .then(resp => setList(resp))
+        .catch(err => {
+          setState({
+            loading: false,
+            error: err.message
+          });
+        });
+    };
+    getList();
   }, []);
 
   useEffect(() => {
     localStorage.setItem('list', JSON.stringify(list));
   }, [list]);
+
+  useEffect(() => {
+    document.title = 'Supermarket';
+  }, []);
 
   if (!list) {
     return <div className="Loading"> Loading ... </div>;

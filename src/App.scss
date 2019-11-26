@@ -33,6 +33,7 @@
     font-size: 2.5em;
     color: var(--color-black);
   }
+
   &-description {
     color: var(--color-dark-gray);
     margin-top: 8px;
@@ -50,11 +51,13 @@
 
     width: calc(44% - 40px);  
     min-width: 280px;
+    max-width: 600px;
     height: 320px; 
-    overflow-y: scroll;   
-
+    
     margin: 32px 0;  
     padding: 0 1em;
+
+    overflow-y: auto;   
   }
   &-list {
     display: flex;
@@ -106,6 +109,11 @@
   background: var(--color-blue);
   border: 1px solid var(--color-dark-blue);
   color: var(--color-white);
+
+  &:not([disabled]):hover {
+    background: var(--color-dark-blue);
+    transition: 0.6s;
+  }
 }
 
 .Button.SECONDARY {
@@ -116,6 +124,7 @@
 .Button.FULL {
   width: calc(44% - 40px);
   min-width: 280px;
+  max-width: 600px;
 }
 
 .Button {
@@ -164,7 +173,6 @@
 
   width: 320px;
   
-  
   background: var(--color-white);
   box-shadow: 0 4px 4px 0
   rgba(1, 1, 1, 0.2);
@@ -190,6 +198,8 @@
   &-wrapper {
     display: flex;
     justify-content: space-between;
+
+    height: 44px;
     margin-top: 16px;
   }
 

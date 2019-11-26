@@ -1,17 +1,7 @@
-const LIST = [
-  {
-    id: 1,
-    title: 'Titulo'
-  },
-  {
-    id: 2,
-    title: 'Titulo Dos'
-  },
-  {
-    id: 3,
-    title: 'Titulo Tres'
-  }
-];
+const initList = () =>
+  (localStorage.getItem('list') && JSON.parse(localStorage.getItem('list'))) || [];
+
+const LIST = initList();
 
 const wait = ms => new Promise(r => setTimeout(r, ms));
 
